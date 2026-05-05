@@ -38,6 +38,11 @@ public class UserRepository {
         );
     }
 
+    public long count() {
+        Long result = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM users", Long.class);
+        return result == null ? 0 : result;
+    }
+
     public Optional<User> findById(String id) {
         List<User> results = jdbcTemplate.query(
             "SELECT * FROM users WHERE id = ?",

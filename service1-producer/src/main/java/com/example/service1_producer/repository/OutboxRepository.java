@@ -29,7 +29,7 @@ public class OutboxRepository {
     }
     public List<Map<String, Object>> findPendingOutbox() {
         return jdbcTemplate.queryForList(
-            "SELECT * FROM outbox WHERE status = 'PENDING' ORDER BY created_at ASC LIMIT 50"
+            "SELECT * FROM outbox WHERE status = 'PENDING' ORDER BY created_at ASC LIMIT 5000"
         );
     }
     public void markPublished(String id) {
@@ -57,6 +57,30 @@ public class OutboxRepository {
             id
         );
         return updated > 0;
+    }
+
+    public void insertUserBatch(List<User> users) {
+        jdbcTemplate.batchUpdate(
+                "INSERT INTO users(id, name, status) VALUES (?, ?, ?)",
+                users,
+                users.size(),
+                (ps, user) -> {
+                    ps.setString(1, user.getId());
+                    ps.setString(2, user.getName());
+                    ps.setString(3, user.getStatus());
+                }
+        );
+    }
+
+    public void insertOutboxBatch(List<User> users, List<String> payloads) {
+        jdbcTemplate.batchUpdate(
+                "INSERT INTO outbox (id, payload, status) VALUES (?, ?, 'PENDING')",
+                new java.util.ArrayList<Object[]>() {{
+                    for (int i = 0; i < users.size(); i++) {
+                        add(new Object[]{ users.get(i).getId(), payloads.get(i) });
+                    }
+                }}
+        );
     }
 
 }
