@@ -28,5 +28,12 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:2.0.17" level="project" />
     <orderEntry type="library" name="Maven: org.apache.kafka:kafka-clients:3.9.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.21.2" level="project" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.46" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.annotation:jakarta.annotation-api:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-tx:6.2.18" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-tx:6.1.8" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:6.2.18" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-messaging:6.2.18" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:6.2.18" level="project" />
   </component>
 </module>
