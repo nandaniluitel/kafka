@@ -1,5 +1,6 @@
 package com.example.service1_producer.config;
 
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -9,13 +10,30 @@ import org.springframework.web.filter.CorsFilter;
 public class CorsConfig {
     @Bean
     public CorsFilter corsFilter() {
+
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOriginPattern("*");
-        config.addAllowedMethod("*");
-        config.addAllowedHeader("*");
+
+        config.setAllowedOrigins(List.of(
+            "https://kafka-ui.vercel.app"
+        ));
+
+        config.setAllowedMethods(List.of(
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ));
+
+        config.setAllowedHeaders(List.of("*"));
+
         config.setAllowCredentials(false);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        UrlBasedCorsConfigurationSource source =
+            new UrlBasedCorsConfigurationSource();
+
         source.registerCorsConfiguration("/**", config);
+
         return new CorsFilter(source);
     }
 }

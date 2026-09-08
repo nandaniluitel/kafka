@@ -12,14 +12,30 @@ public class CorsConfig {
 
     @Bean
     public CorsFilter corsFilter() {
+
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+
+        config.setAllowedOrigins(List.of(
+            "https://kafka-ui.vercel.app"
+        ));
+
+        config.setAllowedMethods(List.of(
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE",
+            "OPTIONS"
+        ));
+
         config.setAllowedHeaders(List.of("*"));
+
         config.setAllowCredentials(false);
-        config.setMaxAge(3600L);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        UrlBasedCorsConfigurationSource source =
+            new UrlBasedCorsConfigurationSource();
+
         source.registerCorsConfiguration("/**", config);
+
         return new CorsFilter(source);
     }
 }

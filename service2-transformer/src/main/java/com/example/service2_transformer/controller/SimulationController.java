@@ -17,6 +17,7 @@ public class SimulationController {
 
     private final KafkaListenerEndpointRegistry registry;
 
+
     @Value("${kafka.consumer.high.concurrency}")
     private int highConcurrency;
 
